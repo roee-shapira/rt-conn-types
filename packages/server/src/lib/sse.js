@@ -10,7 +10,9 @@ module.exports.configSSE = (app) => {
 		let counter = 0;
 		const timerId = setInterval(() => {
 			counter++;
-			const msg = `id: ${Date.now()}\nevnet: message\ndata: { connType: 'server-side-event', counter: ${counter}, companyId: ${companyId} }\n\n`;
+			const msg = `id: ${Date.now()}\nevnet: message\ndata: ${JSON.stringify(
+				{ counter, companyId }
+			)}\n\n`;
 			res.write(msg);
 
 			if (counter > 100) {
@@ -18,7 +20,7 @@ module.exports.configSSE = (app) => {
 				res.end();
 				return next();
 			}
-		}, 1000);
+		}, 5000);
 
 		res.on('close', () => {
 			console.debug('The client closed the connection.');
