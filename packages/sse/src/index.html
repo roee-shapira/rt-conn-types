@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>SSE</title>
+	</head>
+	<body>
+		<h1>SSE</h1>
+		<ul id="output"></ul>
+		<script>
+			fetch('http://localhost:5000/health-check')
+				.then((res) => res.json())
+				.then(console.debug);
+		</script>
+		<script>
+			const outputList = document.body.querySelector('#output');
+			const eventSource = new EventSource(
+				'http://localhost:5000/sse?company-id=123123123'
+			);
+
+			eventSource.onopen = () => {
+				const msgLi = document.createElement('li');
+				const msg = 'SSE connection open.';
+				msgLi.textContent = msg;
+				outputList.appendChild(msgLi);
+			};
+			eventSource.onerror = (event) => {
+				const msgLi = document.createElement('li');
+
+				if (eventSource.readyState === EventSource.CONNECTING) {
+					const msg = `Reconnecting (readyState=${eventSource.readyState})...`;
+					console.warn(msg);
+
+					msgLi.style.color = 'orange';
+					msgLi.textContent = msg;
+					outputList.appendChild(msgLi);
+				} else {
+					console.error('An error has occured.', event);
+
+					msgLi.style.color = 'red';
+					msgLi.textContent = JSON.stringify(event);
+					outputList.appendChild(msgLi);
+				}
+			};
+			eventSource.onmessage = (event) => {
+				const msgLi = document.createElement('li');
+				msgLi.textContent = JSON.stringify(event);
+				outputList.appendChild(msgLi);
+
+				console.log('Event: message', event);
+			};
+		</script>
+	</body>
+</html>

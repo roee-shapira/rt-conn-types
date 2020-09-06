@@ -1,0 +1,29 @@
+{
+	"name": "rt-conn-types",
+	"private": true,
+	"scripts": {
+		"bootstrap": "lerna bootstrap --hoist",
+		"run": "lerna run start --parallel --stream",
+		"run:watch": "lerna run start:dev --parallel --stream",
+		"start": "run-s bootstrap run",
+		"start:watch": "run-s bootstrap run:watch",
+		"postinstall": "run-s start:watch"
+	},
+	"devDependencies": {
+		"eslint": "^7.8.1",
+		"husky": "^4.2.5",
+		"lerna": "^3.22.1",
+		"lint-staged": "^10.3.0",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.1.1"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.js": "eslint --cache --fix",
+		"*.{js,json,css,md,html}": "prettier --write"
+	}
+}

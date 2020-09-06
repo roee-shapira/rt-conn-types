@@ -1,0 +1,17 @@
+{
+	"name": "sse",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"start": "serve --cors --listen 5001 ./src/",
+		"start:dev": "nodemon --ext js,html"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {},
+	"devDependencies": {
+		"nodemon": "^2.0.4",
+		"serve": "^11.3.2"
+	}
+}

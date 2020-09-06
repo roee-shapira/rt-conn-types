@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WS</title>
+	</head>
+	<body>
+		<h1>WS</h1>
+		<script>
+			fetch('http://localhost:5000/health-check')
+				.then((res) => res.json())
+				.then(console.debug);
+		</script>
+		<script src="https://unpkg.com/socket.io-client@2.3.0/dist/socket.io.js"></script>
+		<script>
+			const socket = io('http://localhost:5000?company-id=123123123');
+		</script>
+	</body>
+</html>
