@@ -25,12 +25,28 @@
 			const socket = io(url.toString(), {
 				transports: ['websocket'],
 			});
+			socket.on('connect_error', (error) => {
+				const msgLi = document.createElement('li');
+				msgLi.style.color = 'red';
+				msgLi.textContent = JSON.stringify(error);
+				outputList.appendChild(msgLi);
+
+				console.error(error);
+			});
 			socket.on('message', (data) => {
 				const msgLi = document.createElement('li');
 				msgLi.textContent = JSON.stringify(data);
 				outputList.appendChild(msgLi);
 
 				console.log(data);
+			});
+			socket.on('error', (error) => {
+				const msgLi = document.createElement('li');
+				msgLi.style.color = 'red';
+				msgLi.textContent = JSON.stringify(error);
+				outputList.appendChild(msgLi);
+
+				console.error(error);
 			});
 		</script>
 	</body>
