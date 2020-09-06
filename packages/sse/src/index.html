@@ -14,10 +14,13 @@
 				.then(console.debug);
 		</script>
 		<script>
+			const url = new URL('/sse', 'http://localhost:5000');
+			url.searchParams.append('company-id', 123123123);
+			url.searchParams.append('user-id', 123123123);
+		</script>
+		<script>
 			const outputList = document.body.querySelector('#output');
-			const eventSource = new EventSource(
-				'http://localhost:5000/sse?company-id=123123123'
-			);
+			const eventSource = new EventSource(url.toString());
 
 			eventSource.onopen = () => {
 				const msgLi = document.createElement('li');

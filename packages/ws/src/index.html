@@ -15,9 +15,14 @@
 		</script>
 		<script src="https://unpkg.com/socket.io-client@2.3.0/dist/socket.io.js"></script>
 		<script>
+			const url = new URL('/', 'http://localhost:5000');
+			url.searchParams.append('company-id', 123123123);
+			url.searchParams.append('user-id', 123123123);
+		</script>
+		<script>
 			const outputList = document.body.querySelector('#output');
 
-			const socket = io('http://localhost:5000?company-id=123123123', {
+			const socket = io(url.toString(), {
 				transports: ['websocket'],
 			});
 			socket.on('message', (data) => {
