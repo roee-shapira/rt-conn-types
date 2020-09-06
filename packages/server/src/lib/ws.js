@@ -3,8 +3,6 @@ module.exports.configWS = (io) => {
 		const companyId = socket.handshake.query['company-id'];
 		console.log(`[WS] ${socket.id} from company id ${companyId}.`);
 
-		if (!companyId) return socket.close();
-
 		let counter = 0;
 		const timerId = setInterval(() => {
 			socket.emit('message', {
