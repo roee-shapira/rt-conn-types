@@ -8,6 +8,7 @@ module.exports.configSSE = (app) => {
 		res.flushHeaders();
 
 		const companyId = req.query['company-id'];
+		if (!companyId) throw Error('No company ID given.');
 
 		let counter = 0;
 		const timerId = setInterval(() => {
