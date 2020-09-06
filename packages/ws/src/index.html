@@ -7,6 +7,7 @@
 	</head>
 	<body>
 		<h1>WS</h1>
+		<ul id="output"></ul>
 		<script>
 			fetch('http://localhost:5000/health-check')
 				.then((res) => res.json())
@@ -14,8 +15,17 @@
 		</script>
 		<script src="https://unpkg.com/socket.io-client@2.3.0/dist/socket.io.js"></script>
 		<script>
+			const outputList = document.body.querySelector('#output');
+
 			const socket = io('http://localhost:5000?company-id=123123123', {
 				transports: ['websocket'],
+			});
+			socket.on('message', (data) => {
+				const msgLi = document.createElement('li');
+				msgLi.textContent = JSON.stringify(data);
+				outputList.appendChild(msgLi);
+
+				console.log(data);
 			});
 		</script>
 	</body>

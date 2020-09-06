@@ -1,8 +1,10 @@
 module.exports.configSSE = (app) => {
 	app.route('/sse').get((req, res, next) => {
-		res.setHeader('Cache-Control', 'no-cache');
-		res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
-		res.setHeader('Access-Control-Allow-Origin', '*');
+		res.writeHead(200, {
+			'Content-Type': 'text/event-stream; charset=utf-8',
+			'Cache-Control': 'no-cache',
+			Connection: 'keep-alive',
+		});
 		res.flushHeaders();
 
 		const companyId = req.query['company-id'];
