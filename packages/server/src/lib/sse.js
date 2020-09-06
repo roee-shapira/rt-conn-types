@@ -10,11 +10,8 @@ module.exports.configSSE = (app) => {
 		let counter = 0;
 		const timerId = setInterval(() => {
 			counter++;
-			res.write(
-				JSON.stringify({
-					data: { connType: 'server-side-event', counter, companyId },
-				})
-			);
+			const msg = `id: ${Date.now()}\nevnet: message\ndata: { connType: 'server-side-event', counter: ${counter}, companyId: ${companyId} }\n\n`;
+			res.write(msg);
 
 			if (counter > 100) {
 				clearInterval(timerId);

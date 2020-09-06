@@ -45,7 +45,7 @@
 			};
 			eventSource.onmessage = (event) => {
 				const msgLi = document.createElement('li');
-				msgLi.textContent = JSON.stringify(event);
+				msgLi.textContent = JSON.stringify(event.data);
 				outputList.appendChild(msgLi);
 
 				console.log('Event: message', event);

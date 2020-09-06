@@ -14,7 +14,9 @@
 		</script>
 		<script src="https://unpkg.com/socket.io-client@2.3.0/dist/socket.io.js"></script>
 		<script>
-			const socket = io('http://localhost:5000?company-id=123123123');
+			const socket = io('http://localhost:5000?company-id=123123123', {
+				transports: ['websocket'],
+			});
 		</script>
 	</body>
 </html>
